@@ -1,6 +1,6 @@
 #include "swerveModule.hpp"
 
-bool swerveModule::setAngle(int degrees, int speed)
+bool SwerveModule::set_angle(int degrees, int speed)
 {
-  dirMotor->move_absolute(degrees, speed);
+  dir_motor->move_absolute(degrees, speed);
 }

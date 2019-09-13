@@ -4,22 +4,24 @@
 #include "pros/motors.hpp"
 #include "main.h"
 
-class swerveModule
+class SwerveModule
 {
 private:
-  pros::Motor *driveMotor;
-  pros::Motor *dirMotor;
+  pros::Motor *drive_motor;
+  pros::Motor *dir_motor;
 public:
-  bool setRotation(int degree);
-  void setSpeed(float speed);
+  bool set_rotation(int degree);
+  void set_speed(float speed);
 
-  swerveModule(pros::Motor* direction, pros::Motor* drive)
+  SwerveModule(pros::Motor* direction, pros::Motor* drive)
   {
-    driveMotor=drive;
-    dirMotor=direction;
+    drive_motor=drive;
+    dir_motor=direction;
+
+    dir_motor->set_encoder_units(pros::E_MOTOR_ENCODER_DEGREES);
   }
 
-  bool setAngle(int degrees, int speed);
+  bool set_angle(int degrees, int speed);
 
 };
 
