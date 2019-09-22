@@ -1,6 +1,11 @@
 #include "main.h"
 #include "hardware.hpp"
 
+#include <cstdio>
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+
 
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -16,7 +21,8 @@
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-
+	int logTimer = 500;
+	int logTime = 0;
 	while (true) {
 		//pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
 		//                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
@@ -28,7 +34,19 @@ void opcontrol() {
 		int speed = sqrt(pow(hardware::master->get_analog(ANALOG_LEFT_Y),2) + pow(hardware::master->get_analog(ANALOG_LEFT_X),2));
 		hardware::swerve->set_angle(dir, 200);
 		hardware::drive_mtr->move_velocity(speed);
+
+		/*
 		pros::lcd::print(0, "direction: %i", dir);
-		pros::delay(20);
+
+		FILE* motor_log = fopen("/usd/motor_log.txt","w");
+		fprintf(motor_log, "System Time: %d\n", pros::millis());
+		for(int i = 0; i < 12; i++){
+			fprintf(motor_log, "Motor %d: ", i);
+			fputs("\n", motor_log);
+		}
+		fflush(motor_log);
+		fclose(motor_log);
+		*/
+
 	}
 }
