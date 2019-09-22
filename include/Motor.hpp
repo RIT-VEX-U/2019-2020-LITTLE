@@ -1,7 +1,7 @@
 #ifndef MOTOR_H_
 #define MOTOR_H_
 
-
+#include "api.h"
 #define REVERSED true
 #define NOT_REVERSED false
 #define SLEW_ON true
@@ -16,6 +16,7 @@ typedef struct {
   bool reversed;
   bool slewOn;
   int slewRate;
+  pros::Motor* pointer;
 } Motor;
 
 Motor* motors[10];

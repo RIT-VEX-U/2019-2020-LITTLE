@@ -39,21 +39,7 @@ void opcontrol() {
 		}
 		fflush(motor_log);
 		fclose(motor_log);
-		/*if( pros::millis() - logTime > logTimer){
-			logTime = pros::millis();
-			FILE* motor_log = fopen("/usd/motor_log.txt","w");
-			fprintf(motor_log, "System Time: %d", pros::millis());
-			for(int i = 0; i < 12; i++){
-				fprintf(motor_log, "Motor %d", i);
-			}
-			fclose(motor_log);
-		}*/
-
-		if (master->get_digital_new_press(DIGITAL_A) == 1)
-		{
-			dir_mtr->tare_position();
-			swerve->set_angle(200,200);
-		}
+		
 		pros::delay(1000);
 	}
 }

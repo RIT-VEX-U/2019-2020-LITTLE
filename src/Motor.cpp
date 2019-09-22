@@ -1,4 +1,5 @@
 #include "main.h"
+#include "Motor.hpp"
 
 void initMotor(Motor* motor, int port, bool reversed, bool slewOn){
   motor->portNum = port;
@@ -7,6 +8,7 @@ void initMotor(Motor* motor, int port, bool reversed, bool slewOn){
   motor->speed = 0;
   motor->requestedSpeed = 0;
   motor->slewOn = slewOn;
+  motor->pointer = new pros::Motor(port);
   changeMotor(motor);
 }
 
@@ -45,15 +47,13 @@ void motorSlewTask(void *parameter){
             speed = requested;
         }
         if(requested < speed){
-          speed -= slew;
-          if(speed < requested)
-            speed = requested;
+          speed = requested;
         }
       }
 
       motors[i]->speed = speed;
-      motorSet(motors[i]->portNum, speed);
+      pros::c::motor_move_voltage(motors[i]->portNum, speed * 100);
     }
-    delay(SLEW_DELAY);
+    pros::delay(SLEW_DELAY);
   }
 }
