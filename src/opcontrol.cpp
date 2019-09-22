@@ -21,14 +21,16 @@
  * task, not resume it from where it left off.
  */
 void opcontrol() {
+
+
 	int logTimer = 500;
 	int logTime = 0;
 	while (true) {
 		//pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
 		//                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
 		//                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
-		int mag = hardware::master->get_analog(ANALOG_LEFT_Y);
-		int dir = hardware::master->get_analog(ANALOG_RIGHT_Y);
+		int mag = master->get_analog(ANALOG_LEFT_Y);
+		int dir = master->get_analog(ANALOG_RIGHT_Y);
 		FILE* motor_log = fopen("/usd/motor_log.txt","w");
 		fprintf(motor_log, "System Time: %d\n", pros::millis());
 		for(int i = 0; i < 12; i++){
@@ -47,10 +49,10 @@ void opcontrol() {
 			fclose(motor_log);
 		}*/
 
-		if (hardware::master->get_digital_new_press(DIGITAL_A) == 1)
+		if (master->get_digital_new_press(DIGITAL_A) == 1)
 		{
-			hardware::dir_mtr->tare_position();
-			hardware::swerve->set_angle(200,200);
+			dir_mtr->tare_position();
+			swerve->set_angle(200,200);
 		}
 		pros::delay(1000);
 	}
