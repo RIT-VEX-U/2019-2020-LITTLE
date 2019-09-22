@@ -8,8 +8,8 @@ float direction_gear_ratio=50.0/25.0;
 */
 void SwerveModule::stop(void)
 {
-  dir_motor->move_velocity(0);
-  drive_motor->move_velocity(0);
+  dir_motor.move_velocity(0);
+  drive_motor.move_velocity(0);
 }
 
 /**
@@ -19,7 +19,7 @@ void SwerveModule::stop(void)
 */
 bool SwerveModule::set_angle(int degrees, int speed)
 {
-  dir_motor->move_absolute(direction_gear_ratio*degrees, speed);
+  dir_motor.move_absolute(direction_gear_ratio*degrees, speed);
 }
 
 void SwerveModule::reset_angle(void)
