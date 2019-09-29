@@ -21,25 +21,28 @@
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-
-
 	int logTimer = 500;
 	int logTime = 0;
+	
+	pros::Motor motor(1);
+	motor.set_encoder_units(pros::motor_encoder_units_e::E_MOTOR_ENCODER_ROTATIONS);
+	
+	// clear the log file
+	std::ofstream motor_log = std::ofstream("/usd/motor_log.csv");
+	motor_log.close();
+	
 	while (true) {
 		//pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
 		//                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
 		//                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
 		int mag = master->get_analog(ANALOG_LEFT_Y);
 		int dir = master->get_analog(ANALOG_RIGHT_Y);
-		FILE* motor_log = fopen("/usd/motor_log.txt","w");
-		fprintf(motor_log, "System Time: %d\n", pros::millis());
-		for(int i = 0; i < 12; i++){
-			fprintf(motor_log, "Motor %d: ", i);
-			fputs("\n", motor_log);
-		}
-		fflush(motor_log);
-		fclose(motor_log);
 		
-		pros::delay(1000);
+		// log the motor's position to the log file
+		std::ofstream motor_log = std::ofstream("/usd/motor_log.csv", std::ios::app);
+		motor_log << pros::millis() << ',' << motor.get_position() << '\n';
+		motor_log.close();
+		
+		pros::delay(10);
 	}
 }
