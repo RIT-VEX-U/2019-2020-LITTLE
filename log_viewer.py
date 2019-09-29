@@ -17,8 +17,8 @@ if __name__ == "__main__":
             positions.append(float(position))
     
     # plot the data
-    plt.title("Motor encoder log")
+    plt.title("Motor log")
     plt.plot(timestamps, positions)
     plt.xlabel("Milliseconds since PROS initialized")
-    plt.ylabel("Encoder units")
+    plt.ylabel("Current draw (mA)")
     plt.show()

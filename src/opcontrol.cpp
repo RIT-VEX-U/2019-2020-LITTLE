@@ -26,6 +26,7 @@ void opcontrol() {
 	
 	pros::Motor motor(1);
 	motor.set_encoder_units(pros::motor_encoder_units_e::E_MOTOR_ENCODER_ROTATIONS);
+	motor.move_absolute(5.0, 100);
 	
 	// clear the log file
 	std::ofstream motor_log = std::ofstream("/usd/motor_log.csv");
@@ -40,7 +41,7 @@ void opcontrol() {
 		
 		// log the motor's position to the log file
 		std::ofstream motor_log = std::ofstream("/usd/motor_log.csv", std::ios::app);
-		motor_log << pros::millis() << ',' << motor.get_position() << '\n';
+		motor_log << pros::millis() << ',' << motor.get_current_draw() << '\n';
 		motor_log.close();
 		
 		pros::delay(10);
