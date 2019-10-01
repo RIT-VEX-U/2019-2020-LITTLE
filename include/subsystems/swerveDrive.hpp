@@ -1,0 +1,41 @@
+#ifndef _SWERVE_DRIVE_
+#define _SWERVE_DRIVE_
+
+#include "main.h"
+#include "swerveModule.hpp"
+
+class SwerveDrive
+{
+private:
+  SwerveModule frontLeft;
+  SwerveModule frontRight;
+  SwerveModule backLeft;
+  SwerveModule backRight;
+
+public:
+
+  enum RotVal {LEFT, RIGHT};
+
+  void drive(float direction, float speed, float rotation);
+
+  bool set_direction(float direction);
+
+  bool set_rotation(float direction);
+
+  bool set_speed(float speed);
+
+  bool auto_drive_inches(float direction, float speed);
+
+  bool auto_rotate_degrees(float degrees, float speed);
+
+  SwerveDrive(SwerveModule frontLeft, SwerveModule frontRight, SwerveModule backLeft, SwerveModule backRight)
+  {
+    this->frontLeft=frontLeft;
+    this->frontRight=frontRight;
+    this->backLeft=backLeft;
+    this->backRight=backRight;
+  }
+
+}
+
+#endif
