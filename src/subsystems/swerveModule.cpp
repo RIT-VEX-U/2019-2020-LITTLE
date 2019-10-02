@@ -34,7 +34,7 @@ void SwerveModule::set_speed(float percent)
 * to the angle, taking into account the gear ratio for the
 * direction motor. Also compensates for the direction motor turning the wheel.
 */
-bool SwerveModule::set_angle(int degrees)
+bool SwerveModule::set_angle(float degrees)
 {
   dir_motor.move_absolute(degrees * direction_gear_ratio, max_rpm_direction);
   drive_motor.move_velocity(-dir_motor.get_actual_velocity() / direction_gear_ratio);
