@@ -7,8 +7,8 @@
 class SwerveModule
 {
 private:
-  pros::Motor drive_motor;
-  pros::Motor dir_motor;
+  pros::Motor& drive_motor;
+  pros::Motor& dir_motor;
   pros::motor_gearset_e_t drive_gearset;
   pros::motor_gearset_e_t direction_gearset;
 
@@ -41,7 +41,7 @@ public:
   * \param drive_gear_ratio
   *        The gearing core inserted into the drive motor
   */
-  SwerveModule(pros::Motor direction, pros::Motor drive,
+  SwerveModule(pros::Motor& direction, pros::Motor& drive,
                pros::motor_gearset_e_t dir_gear_ratio,
                pros::motor_gearset_e_t drive_gear_ratio):
                 drive_motor(drive), dir_motor(direction)

@@ -7,10 +7,10 @@
 class SwerveDrive
 {
 private:
-  SwerveModule frontLeft;
-  SwerveModule frontRight;
-  SwerveModule backLeft;
-  SwerveModule backRight;
+  SwerveModule& frontLeft;
+  SwerveModule& frontRight;
+  SwerveModule& backLeft;
+  SwerveModule& backRight;
 
 public:
 
@@ -28,14 +28,10 @@ public:
 
   bool auto_rotate_degrees(float degrees, float speed);
 
-  SwerveDrive(SwerveModule frontLeft, SwerveModule frontRight, SwerveModule backLeft, SwerveModule backRight)
-  {
-    this->frontLeft=frontLeft;
-    this->frontRight=frontRight;
-    this->backLeft=backLeft;
-    this->backRight=backRight;
-  }
+  SwerveDrive(SwerveModule& frontLeft, SwerveModule& frontRight, SwerveModule& backLeft, SwerveModule& backRight):
+  frontLeft(frontLeft), frontRight(frontRight), backLeft(backLeft), backRight(backRight)
+  {  }
 
-}
+};
 
 #endif
