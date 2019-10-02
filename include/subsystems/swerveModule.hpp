@@ -26,7 +26,11 @@ public:
   void stop(void);
   void set_module(float drive_percent, float direction_degrees);
   void set_speed(float speed);
+<<<<<<< HEAD
   bool set_angle(float degrees, float speed);
+=======
+  bool set_angle(int degrees);
+>>>>>>> f3c6eb322591ec2130d98ac63acfb73fb62552f6
   void reset_angle(void);
 
   /**
@@ -50,7 +54,6 @@ public:
     drive_motor.set_gearing(drive_gear_ratio);
 
     drive_gearset=drive_gear_ratio;
-    direction_gearset=dir_gear_ratio;
     dir_motor.set_encoder_units(pros::E_MOTOR_ENCODER_DEGREES);
 
     max_rpm_drive=(drive_gearset == pros::E_MOTOR_GEARSET_06) ? 600 : (drive_gearset == pros::E_MOTOR_GEARSET_18) ? 200 : 100;
