@@ -1,5 +1,6 @@
 #include "main.h"
 #include "hardware.hpp"
+#include "logging.hpp"
 
 #include <cstdio>
 #include <iostream>
@@ -29,8 +30,7 @@ void opcontrol() {
 	motor.move_absolute(5.0, 100);
 	
 	// clear the log file
-	std::ofstream motor_log = std::ofstream("/usd/motor_log.csv");
-	motor_log.close();
+	logging::clearLogFile();
 	
 	while (true) {
 		//pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
@@ -40,9 +40,7 @@ void opcontrol() {
 		int dir = master->get_analog(ANALOG_RIGHT_Y);
 		
 		// log the motor's position to the log file
-		std::ofstream motor_log = std::ofstream("/usd/motor_log.csv", std::ios::app);
-		motor_log << pros::millis() << ',' << motor.get_current_draw() << '\n';
-		motor_log.close();
+		logging::log(motor.get_current_draw());
 		
 		pros::delay(10);
 	}
