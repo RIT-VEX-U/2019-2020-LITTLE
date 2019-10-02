@@ -26,7 +26,7 @@ public:
   void stop(void);
   void set_module(float drive_percent, float direction_degrees);
   void set_speed(float speed);
-  bool set_angle(int degrees, int speed);
+  bool set_angle(float degrees, float speed);
   void reset_angle(void);
 
   /**
