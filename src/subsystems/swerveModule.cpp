@@ -15,7 +15,7 @@ void SwerveModule::stop(void)
 */
 void SwerveModule::set_module(float drive_percent, float direction_degrees)
 {
-  float velocity = (drive_percent * max_rpm_drive) - (dir_motor.get_actual_velocity()/direction_gear_ratio);
+  int velocity = (drive_percent * max_rpm_drive) - (dir_motor.get_actual_velocity()/direction_gear_ratio);
 
   dir_motor.move_absolute(direction_degrees * direction_gear_ratio, max_rpm_direction);
   drive_motor.move_velocity(velocity);
