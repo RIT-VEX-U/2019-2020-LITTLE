@@ -11,6 +11,8 @@ private:
   SwerveModule& frontRight;
   SwerveModule& backLeft;
   SwerveModule& backRight;
+  float wheelbase_mm = 0.0;
+  float trackwidth_mm = 0.0;
 
 public:
 
