@@ -33,7 +33,8 @@ void opcontrol() {
 		int dir = ((180.0/3.14159265) * atan2(hardware::master.get_analog(ANALOG_LEFT_X), hardware::master.get_analog(ANALOG_LEFT_Y)));
 		float speed = sqrt(pow(hardware::master.get_analog(ANALOG_LEFT_Y)/127.0,2) + pow(hardware::master.get_analog(ANALOG_LEFT_X)/127.0,2));
 		pros::lcd::print(0,"speed: %f", speed);
-		hardware::swerve.set_module(dir, speed);
+		hardware::swerve.set_module(speed, dir);
+		//hardware::swerve.set_angle(dir);
 		//hardware::drive_mtr.move_velocity(speed);
 
 		/*

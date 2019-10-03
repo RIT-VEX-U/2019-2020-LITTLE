@@ -22,6 +22,9 @@ private:
   // 10 on that same shaft, and 30 on the wheel.
   float drive_gear_ratio=(19.0/13.0)*(10.0/30.0);
   float direction_motor_speed = max_rpm_direction;
+
+  int drive_direction=1;
+
 public:
   void stop(void);
   void set_module(float drive_percent, float direction_degrees);
