@@ -1,5 +1,6 @@
 #include "main.h"
 #include "hardware.hpp"
+#include "Motor.hpp"
 #include "logging.hpp"
 
 #include <cstdio>
@@ -24,24 +25,23 @@
 void opcontrol() {
 	int logTimer = 500;
 	int logTime = 0;
-	
-	pros::Motor motor(1);
-	motor.set_encoder_units(pros::motor_encoder_units_e::E_MOTOR_ENCODER_ROTATIONS);
-	motor.move_absolute(5.0, 100);
-	
+
+
+
+
+
 	// clear the log file
 	logging::clearLogFile();
-	
+
 	while (true) {
 		//pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
 		//                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
 		//                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
 		int mag = master->get_analog(ANALOG_LEFT_Y);
 		int dir = master->get_analog(ANALOG_RIGHT_Y);
+
 		
-		// log the motor's position to the log file
-		logging::log(motor.get_current_draw());
-		
+
 		pros::delay(10);
 	}
 }

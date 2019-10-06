@@ -21,11 +21,25 @@
 #define PROS_USE_LITERALS
 
 #include "api.h"
+#include "Motor.hpp"
 
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#define REVERSED true
+#define NOT_REVERSED false
+#define SLEW_ON true
+#define SLEW_OFF false
+#define DEFAULT_SLEW_RATE 15
+#define SLEW_DELAY 25
+
+Motor paulLeft;
+Motor paulRight;
+
+
+
 void autonomous(void);
 void initialize(void);
 void disabled(void);
