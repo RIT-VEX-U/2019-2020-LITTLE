@@ -23,6 +23,7 @@
 void opcontrol() {
 	int logTimer = 500;
 	int logTime = 0;
+	hardware::dir_mtr.set_reversed(true);
 	while (true) {
 		//pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
 		//                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
