@@ -3,6 +3,11 @@
 #include <math.h>
 #define PI 3.1415926535897932
 
+void drive_test(int leftx, int lefty, int rightx)
+{
+
+}
+
 //Control algorithm based on papers found at this link:
 //https://www.chiefdelphi.com/t/paper-4-wheel-independent-drive-independent-steering-swerve/107383
 
@@ -19,6 +24,7 @@
  */
 void SwerveDrive::drive(float direction, float speed, float rotation)
 {
+
   float dirRads = direction * (PI/180);
   //the X axis is defined so the robot strafing towards the starboard direction
   //is positive x

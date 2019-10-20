@@ -1,4 +1,5 @@
 #include "subsystems/swerveModule.hpp"
+#include "utils/BAMAngles.h"
 
 /**
 * Stops all motors associated with this module
@@ -15,12 +16,24 @@ void SwerveModule::stop(void)
 */
 void SwerveModule::set_module(float drive_percent, float direction_degrees)
 {
-  float current_angle = drive_motor.get_position()/direction_gear_ratio;
-  //float reduced_angle = current_angle - (current_angle-(current_angle%360));
-  int velocity = (drive_percent * max_rpm_drive) - (dir_motor.get_actual_velocity()/direction_gear_ratio);
+  int current_pos = dir_motor.get_position();
+  float velocity = (drive_percent * max_rpm_drive) - (dir_motor.get_actual_velocity()/direction_gear_ratio);
 
-  dir_motor.move_absolute(direction_degrees * direction_gear_ratio, max_rpm_direction);
-  drive_motor.move_velocity(velocity);
+  bamAngle_t currentBAM = floatToBAM(current_pos / direction_gear_ratio);
+  bamAngle_t tgtBAM = floatToBAM(direction_degrees);
+
+  float delta = bamToFloat(tgtBAM - currentBAM);
+  float normalizedDelta = delta + (fabs(delta) > 90 ? (delta > 0 ? -180 : 180) : 0);
+
+  int drive_multiplier = abs(delta) > 90 ? -1 : 1;
+
+  velocity *= pow(1 - (fabs(normalizedDelta) / 90.0), 3);
+
+  pros::lcd::print(0, "delta: %f\n", normalizedDelta);
+  pros::lcd::print(1, "speed: %f\n", drive_multiplier * velocity);
+
+  dir_motor.move_absolute(current_pos + (normalizedDelta * direction_gear_ratio), max_rpm_direction);
+  drive_motor.move_velocity(velocity * drive_multiplier);
 }
 
 /**

@@ -24,18 +24,20 @@ void opcontrol() {
 	int logTimer = 500;
 	int logTime = 0;
 	while (true) {
-		//pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
-		//                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
-		//                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
-		int mag = hardware::master.get_analog(ANALOG_LEFT_Y);
-		//int dir = hardware::master->get_analog(ANALOG_RIGHT_Y);
 
-		int dir = ((180.0/3.14159265) * atan2(hardware::master.get_analog(ANALOG_LEFT_X), hardware::master.get_analog(ANALOG_LEFT_Y)));
-		float speed = sqrt(pow(hardware::master.get_analog(ANALOG_LEFT_Y)/127.0,2) + pow(hardware::master.get_analog(ANALOG_LEFT_X)/127.0,2));
-		pros::lcd::print(0,"speed: %f", speed);
-		hardware::swerve.set_module(speed, dir);
-		//hardware::swerve.set_angle(dir);
-		//hardware::drive_mtr.move_velocity(speed);
+		float x = hardware::master.get_analog(ANALOG_LEFT_X) / 127.0;
+		float y = hardware::master.get_analog(ANALOG_LEFT_Y) / 127.0;
+
+		//angle of joystick, -180<dir<180
+		float dir = (atan2(-x, y) * (180/3.14159265));
+		float speed = sqrt( (y*y) + (x*x) );
+
+		hardware::lf_module.set_module(speed, dir);
+		hardware::rf_module.set_module(speed, dir);
+		hardware::lr_module.set_module(speed, dir);
+		hardware::rr_module.set_module(speed, dir);
+
+		pros::delay(20);
 
 		/*
 		pros::lcd::print(0, "direction: %i", dir);
@@ -49,6 +51,5 @@ void opcontrol() {
 		fflush(motor_log);
 		fclose(motor_log);
 		*/
-
 	}
 }
