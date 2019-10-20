@@ -14,14 +14,16 @@ extern "C" {
 
 bamAngle_t floatToBAM(float degrees)
 {
-  //Bring it into BAM
+  //degrees/180 makes the angle into a multiplier from [-1, 1], which we can
+  //then mutiply by INT32_MAX to create a BAM angle.
   bamAngle_t bam = (bamAngle_t)(degrees/180 * INT32_MAX);
   return bam;
 }
 
 float bamToFloat(bamAngle_t bam)
 {
-  //Scale it to -1 - 1 and bring it back into the degree range
+  //Turn our BAM back into a multiplier from [-1, 1], then multiply by 180 degrees
+  //to get our angle back
   float degrees = (((float)(bam)) / INT32_MAX) * 180.0;
   return degrees;
 }
