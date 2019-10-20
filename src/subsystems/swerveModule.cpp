@@ -27,10 +27,10 @@ void SwerveModule::set_module(float drive_percent, float direction_degrees)
 
   int drive_multiplier = abs(delta) > 90 ? -1 : 1;
 
-  velocity *= pow(normalizedDelta / 90.0, 3);
+  velocity *= pow(1 - (normalizedDelta / 90.0), 3);
 
   //pros::lcd::print(0, "delta: %f\n", normalizedDelta);
-  //pros::lcd::print(1, "speed: %f\n", drive_multiplier * velocity);
+  pros::lcd::print(1, "speed: %f\n", drive_multiplier * velocity);
 
   dir_motor.move_absolute(current_pos + (normalizedDelta * direction_gear_ratio), max_rpm_direction);
   drive_motor.move_velocity(velocity * drive_multiplier);

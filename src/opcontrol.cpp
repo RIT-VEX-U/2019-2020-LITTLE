@@ -30,14 +30,14 @@ void opcontrol() {
 		float y = hardware::master.get_analog(ANALOG_LEFT_Y) / 127.0;
 
 		//angle of joystick, -180<dir<180
-		float dir = (atan2(x, y) * (180/3.14159265));
+		float dir = (atan2(-x, y) * (180/3.14159265));
 		float speed = sqrt( (y*y) + (x*x) );
 
 		hardware::lf_module.set_module(speed, dir);
 		hardware::rf_module.set_module(speed, dir);
 		hardware::lr_module.set_module(speed, dir);
 		hardware::rr_module.set_module(speed, dir);
-		
+
 		pros::delay(20);
 
 		/*
