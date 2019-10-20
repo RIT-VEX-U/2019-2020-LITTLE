@@ -1,12 +1,11 @@
 #include "subsystems/swerveDrive.hpp"
 #include "main.h"
-#include "utils/vmath.h"
 #include <math.h>
 #define PI 3.1415926535897932
 
 void drive_test(int leftx, int lefty, int rightx)
 {
-  
+
 }
 
 //Control algorithm based on papers found at this link:

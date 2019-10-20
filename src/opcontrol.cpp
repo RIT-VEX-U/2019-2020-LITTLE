@@ -21,7 +21,6 @@
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	pros::lcd::initialize();
 	int logTimer = 500;
 	int logTime = 0;
 	while (true) {
