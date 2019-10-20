@@ -23,7 +23,7 @@
 void opcontrol() {
 	int logTimer = 500;
 	int logTime = 0;
-	hardware::dir_mtr.set_reversed(true);
+	
 	while (true) {
 
 		float x = hardware::master.get_analog(ANALOG_LEFT_X) / 127.0;

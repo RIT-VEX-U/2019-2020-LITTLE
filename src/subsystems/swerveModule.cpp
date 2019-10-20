@@ -16,15 +16,9 @@ void SwerveModule::stop(void)
 */
 void SwerveModule::set_module(float drive_percent, float direction_degrees)
 {
-<<<<<<< HEAD
-  int current_angle = drive_motor.get_position()/direction_gear_ratio;
-  int reduced_angle = current_angle - (current_angle-(current_angle%360));
 
-  int velocity = (drive_percent * max_rpm_drive) + (dir_motor.get_actual_velocity()/direction_gear_ratio);
-=======
   int current_pos = dir_motor.get_position();
   float velocity = (drive_percent * max_rpm_drive) - (dir_motor.get_actual_velocity()/direction_gear_ratio);
->>>>>>> bbb39c46789667b7903b4a0ee038f2c23ad00b3a
 
   bamAngle_t currentBAM = floatToBAM(current_pos / direction_gear_ratio);
   bamAngle_t tgtBAM = floatToBAM(direction_degrees);
