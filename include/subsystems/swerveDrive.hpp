@@ -14,6 +14,8 @@ private:
   float wheelbase_mm = 0.0;
   float trackwidth_mm = 0.0;
 
+  float turn_angle_rad = atan(wheelbase_mm / trackwidth_mm);
+
 public:
 
   enum RotVal {LEFT, RIGHT};
