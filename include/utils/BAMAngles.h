@@ -19,7 +19,7 @@ typedef int32_t bamAngle_t;
 /**
  * Convert a floating point angle into Binary Angle Measure.
  * \param degrees
- *   The number of degrees, from 0-360.
+ *   The number of degrees, from -180-180.
  * \return
  *   \p degrees represented as BAM.
  */
