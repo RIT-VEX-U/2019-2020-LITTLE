@@ -8,22 +8,22 @@
 
 namespace hardware
 {
-    pros::Controller master(pros::E_CONTROLLER_MASTER);
+    extern pros::Controller master;
 
-    pros::Motor lf_drive(11);
-    pros::Motor lf_dir(12, true);
-    pros::Motor rf_drive(2);
-    pros::Motor rf_dir(1, true);
-    pros::Motor lr_drive(19);
-    pros::Motor lr_dir(20, true);
-    pros::Motor rr_drive(10);
-    pros::Motor rr_dir(9, true);
+    extern pros::Motor lf_drive;
+    extern pros::Motor lf_dir;
+    extern pros::Motor rf_drive;
+    extern pros::Motor rf_dir;
+    extern pros::Motor lr_drive;
+    extern pros::Motor lr_dir;
+    extern pros::Motor rr_drive;
+    extern pros::Motor rr_dir;
 
-    SwerveModule lf_module(lf_dir, lf_drive, pros::E_MOTOR_GEARSET_18, pros::E_MOTOR_GEARSET_06);
-    SwerveModule rf_module(rf_dir, rf_drive, pros::E_MOTOR_GEARSET_18, pros::E_MOTOR_GEARSET_06);
-    SwerveModule lr_module(lr_dir, lr_drive, pros::E_MOTOR_GEARSET_18, pros::E_MOTOR_GEARSET_06);
-    SwerveModule rr_module(rr_dir, rr_drive, pros::E_MOTOR_GEARSET_18, pros::E_MOTOR_GEARSET_06);
+    extern SwerveModule lf_module;
+    extern SwerveModule rf_module;
+    extern SwerveModule lr_module;
+    extern SwerveModule rr_module;
 
-    SwerveDrive swerve(lf_module, rf_module, lr_module, rr_module);
+    extern SwerveDrive swerve;
 }
 #endif
