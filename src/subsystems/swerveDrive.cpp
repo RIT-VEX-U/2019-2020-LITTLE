@@ -20,7 +20,7 @@
 void SwerveDrive::drive_test(int leftx, int lefty, int rightx)
 {
   Vector2 lateralVec;
-  lateralVec.setxy(leftx, lefty);
+  lateralVec.setxy(lefty, leftx);
 
   Vector2 rot_lf, rot_rf, rot_lr, rot_rr;
 

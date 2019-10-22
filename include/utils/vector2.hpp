@@ -16,7 +16,7 @@ public:
 
   float get_angle_rad()
   {
-    return atan2(x, y);
+    return atan2(y, x);
   }
 
   float get_angle_deg()
