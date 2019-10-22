@@ -22,6 +22,8 @@ public:
 
   void drive(float direction, float speed, float rotation);
 
+  void drive_test(int leftx, int lefty, int rightx);
+
   bool set_direction(float direction);
 
   bool set_rotation(float direction);

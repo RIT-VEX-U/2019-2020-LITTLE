@@ -21,17 +21,37 @@ public:
 
   float get_angle_deg()
   {
-    return get_angle_rad * (180.0/3.141592654);
+    return get_angle_rad() * (180.0/3.141592654);
   }
 
-  Vector2 operator+(const Vector2& rhs)
+  void normalize(float max_val)
   {
-    return Vector2().setxy(x+rhs.x, y+rhs.y);
+    x /= max_val;
+    y /= max_val;
   }
 
-  Vector2 operator-(const Vector2& rhs)
+  const Vector2 operator+(const Vector2& rhs)
   {
-    return Vector2().setxy(x-rhs.x, y-rhs.y);
+    Vector2 rval;
+    rval.setxy(x+rhs.x, y+rhs.y);
+    return rval;
+  }
+
+  const Vector2 operator-(const Vector2& rhs)
+  {
+    Vector2 rval;
+    rval.setxy(x-rhs.x, y-rhs.y);
+    return rval;
+  }
+
+  bool operator==(const Vector2& rhs)
+  {
+    return (x==rhs.x) && (y==rhs.y);
+  }
+
+  bool operator!=(const Vector2& rhs)
+  {
+    return !(*this==rhs);
   }
 
   void setxy(float x, float y)
@@ -45,6 +65,6 @@ public:
     x = length * cos(dir);
     y = length * sin(dir);
   }
-}
+};
 
 #endif
