@@ -22,6 +22,9 @@ void SwerveDrive::drive_test(int leftx, int lefty, int rightx)
   Vector2 lateralVec;
   lateralVec.setxy(lefty, leftx);
 
+  pros::lcd::print(0, "dir: %f", lateralVec.get_angle_deg());
+  pros::lcd::print(1, "mag: %f", lateralVec.get_length());
+
   Vector2 rot_lf, rot_rf, rot_lr, rot_rr;
 
   rot_lf.set_length_dir(rightx, PI/4);
