@@ -32,15 +32,30 @@ void SwerveDrive::drive_test(int leftx, int lefty, int rightx)
   rot_rr.set_length_dir(rightx, (5*PI)/4);
   rot_lr.set_length_dir(rightx, (7*PI)/4);
 
+
   Vector2 lf_out = (lateralVec + rot_lf);
   Vector2 rf_out = (lateralVec + rot_rf);
   Vector2 lr_out = (lateralVec + rot_lr);
   Vector2 rr_out = (lateralVec + rot_rr);
 
-  lf_out.normalize(255);
-  rf_out.normalize(255);
-  lr_out.normalize(255);
-  rr_out.normalize(255);
+  int lf_l = lf_out.get_length(), rf_l = rf_out.get_length(), lr_l = lr_out.get_length(), rr_l = rr_out.get_length();
+
+  //float max = lf_l>rf_l ? lf_l>lr_l ? lf_l>rr_l ? lf_l : rr_l : lr_l>rr_l ? lr_l : rr_l : lr_l>rr_l ? lr_l : rr_l : rf_l>lr_l ? rf_l>rr_l? rr_l : rf_l : lr_l;
+
+  float max = 127;
+  if(lf_l > max)
+    max = lf_l;
+  if(rf_l > max)
+    max = rf_l;
+  if(rr_l > max)
+    max=rr_l;
+  if(lr_l > max)
+    max=lr_l;
+
+  lf_out.normalize(max);
+  rf_out.normalize(max);
+  lr_out.normalize(max);
+  rr_out.normalize(max);
 
   pros::lcd::print(4, "dir: %f", rf_out.get_angle_deg());
   pros::lcd::print(5, "mag: %f", rf_out.get_length());
