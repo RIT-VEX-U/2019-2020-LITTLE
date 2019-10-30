@@ -4,6 +4,7 @@
 #include "pros/motors.hpp"
 #include "main.h"
 #include "subsystems/swerveModule.hpp"
+#include "utils/i2c_imu.hpp"
 
 namespace hardware
 {
@@ -13,5 +14,7 @@ namespace hardware
     extern pros::Motor dir_mtr;
 
     extern SwerveModule swerve;
+
+    extern I2CImu imu;
 }
 #endif
