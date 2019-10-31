@@ -1,7 +1,7 @@
 #ifndef _I2CIMU_
 #define _I2CIMU_
 
-#include <stdint.h>
+#include "api.h"
 
 /*
 
@@ -36,6 +36,10 @@ enum i2c_config_accel
   FSR_16G = 0b00011000
 };
 
+enum axis_t {  X, Y, Z };
+
+enum motion_t { ACCEL, VEL, POS };
+
 class I2CImu
 {
 
@@ -69,6 +73,11 @@ void send_byte(uint8_t _register, uint8_t _value);
 
 uint8_t revceive_byte(uint8_t _register);
 
+static void i2c_task_fn(void* params);
+
+pros::task_t comm_task = pros::c::task_create(i2c_task_fn, NULL, TASK_PRIORITY_DEFAULT,
+                                TASK_STACK_DEPTH_DEFAULT, "I2C_IMU");
+
 public:
 
 void initialize();
@@ -77,6 +86,9 @@ void config_accel(i2c_config_accel _config_type);
 
 void config_gyro(i2c_config_gyro _config_type);
 
+float get_gyro(axis_t _axis, motion_t _motion);
+
+float get_accel(axis_t _axis, motion_t _motion);
 
 I2CImu (uint8_t _clock, uint8_t _data):
 clock(_clock), data(_data)

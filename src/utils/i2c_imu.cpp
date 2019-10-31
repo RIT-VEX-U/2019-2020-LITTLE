@@ -24,3 +24,18 @@ void I2CImu::config_gyro(i2c_config_gyro _config_type)
 {
 
 }
+
+float I2CImu::get_gyro(axis_t _axis, motion_t _motion)
+{
+
+}
+
+float I2CImu::get_accel(axis_t _axis, motion_t _motion)
+{
+
+}
+
+void I2CImu::i2c_task_fn(void* params)
+{
+
+}
