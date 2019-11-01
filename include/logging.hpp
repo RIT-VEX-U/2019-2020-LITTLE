@@ -67,7 +67,6 @@ namespace logging {
         impl::logHelper(out, std::forward<Args>(args)...);
         out << '\n';
     }
-
 }
 
 #endif

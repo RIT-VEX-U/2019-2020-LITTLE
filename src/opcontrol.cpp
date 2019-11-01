@@ -1,5 +1,6 @@
 #include "main.h"
 #include "hardware.hpp"
+#include "logging.hpp"
 
 #include <cstdio>
 #include <iostream>
@@ -23,6 +24,10 @@
 void opcontrol() {
 	int logTimer = 500;
 	int logTime = 0;
+
+	// clear the log file
+	logging::clearLogFile();
+
 	while (true) {
 		//pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
 		//                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
@@ -32,7 +37,6 @@ void opcontrol() {
 
 		int dir = ((180.0/3.14159265) * atan2(hardware::master.get_analog(ANALOG_LEFT_X), hardware::master.get_analog(ANALOG_LEFT_Y)));
 		int speed = sqrt(pow(hardware::master.get_analog(ANALOG_LEFT_Y),2) + pow(hardware::master.get_analog(ANALOG_LEFT_X),2));
-		hardware::swerve.set_angle(dir, 200);
 		hardware::drive_mtr.move_velocity(speed);
 
 		/*
