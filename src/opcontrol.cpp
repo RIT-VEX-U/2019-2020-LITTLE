@@ -1,6 +1,5 @@
 #include "main.h"
 #include "hardware.hpp"
-#include "Motor.hpp"
 #include "logging.hpp"
 
 #include <cstdio>
@@ -26,10 +25,6 @@ void opcontrol() {
 	int logTimer = 500;
 	int logTime = 0;
 
-
-
-
-
 	// clear the log file
 	logging::clearLogFile();
 
@@ -42,7 +37,6 @@ void opcontrol() {
 
 		int dir = ((180.0/3.14159265) * atan2(hardware::master.get_analog(ANALOG_LEFT_X), hardware::master.get_analog(ANALOG_LEFT_Y)));
 		int speed = sqrt(pow(hardware::master.get_analog(ANALOG_LEFT_Y),2) + pow(hardware::master.get_analog(ANALOG_LEFT_X),2));
-		hardware::swerve.set_angle(dir, 200);
 		hardware::drive_mtr.move_velocity(speed);
 
 		/*

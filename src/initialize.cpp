@@ -1,6 +1,5 @@
 #include "main.h"
 #include "api.h"
-#include "Motor.hpp"
 
 void on_center_button() {
 	static bool pressed = false;
@@ -24,11 +23,7 @@ void initialize() {
 
 	pros::lcd::register_btn1_cb(on_center_button);
 
-	initMotor(&paulLeft,3, NOT_REVERSED, SLEW_ON);
-	initMotor(&paulRight, 4, NOT_REVERSED, SLEW_ON);
-	
 	std::string taskName = "motorSlew";
-	pros::task_t motorTask = pros::c::task_create(motorSlewTask, NULL, TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT, "SlewTask");
 }
 
 /**
