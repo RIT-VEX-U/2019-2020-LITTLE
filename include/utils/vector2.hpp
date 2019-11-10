@@ -7,7 +7,7 @@ class Vector2
 {
 public:
 
-  float x, y;
+  float x = 0, y = 0;
 
   float get_length()
   {
