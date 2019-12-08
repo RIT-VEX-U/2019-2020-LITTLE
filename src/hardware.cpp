@@ -1,22 +1,22 @@
 #include "hardware.hpp"
 
 using namespace pros;
-using namespace Hardware;
-Controller master(pros::E_CONTROLLER_MASTER);
 
-okapi::ADIGyro gyro(1, .1);
+Controller Hardware::master(pros::E_CONTROLLER_MASTER);
 
-Motor drive_mtr(11);
-Motor dir_mtr(12);
+okapi::ADIGyro Hardware::gyro(1, .1);
 
-okapi::MotorGroup lift_motors = {5, -6, 7, -8};
+Motor Hardware::drive_mtr(11);
+Motor Hardware::dir_mtr(12);
 
-rd4Bar lift(Hardware::lift_motors, 20);
+okapi::MotorGroup Hardware::lift_motors = {5, -6, 7, -8};
+
+rd4Bar Hardware::lift(Hardware::lift_motors, 20);
 
 //!!! TEMP VALS !!!
-okapi::MotorGroup linear_slide = {1, 2};
-okapi::MotorGroup intake_rollers = {3, 4};
+okapi::MotorGroup Hardware::linear_slide = {1, 2};
+okapi::MotorGroup Hardware::intake_rollers = {3, 4};
 
-okapi::MotorGroup claw = {9, 10};
+okapi::MotorGroup Hardware::claw = {9, 10};
 
-Motor magazine(13);
+Motor Hardware::magazine(13);
