@@ -1,5 +1,6 @@
 #include "main.h"
 #include "api.h"
+#include "config.hpp"
 
 void on_center_button() {
 	static bool pressed = false;
@@ -23,7 +24,7 @@ void initialize() {
 
 	pros::lcd::register_btn1_cb(on_center_button);
 
-	std::string taskName = "motorSlew";
+	config::initialize();
 }
 
 /**
