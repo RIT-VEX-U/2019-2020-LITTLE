@@ -21,6 +21,8 @@ rd4Bar Hardware::lift(Hardware::lift_motors, 20);
 okapi::MotorGroup Hardware::linear_slide = {1, 2};
 okapi::MotorGroup Hardware::intake_rollers = {3, 4};
 
-okapi::MotorGroup Hardware::claw = {9, 10};
+Motor Hardware::spool(10);
+
+VerticalIntake Hardware::vert_intake(intake_rollers, spool);
 
 Motor Hardware::magazine(11);

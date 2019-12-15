@@ -1,8 +1,9 @@
 #include "main.h"
+#include "hardware.hpp"
 
 enum AutoState
 {
-INIT, COLLECTI, TURN1, DRIVE1, COLLECTJ, TURN2, 
+INIT, COLLECTI, TURN1, DRIVE1, COLLECTJ, TURN2,
 DRIVE2, TURN3, COLLECTM3, TURN4, DRIVE3, TURN5, DRIVE4, DROP_OFF, END
 };
 
@@ -19,7 +20,7 @@ AutoState current_state = INIT;
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() 
+void autonomous()
 {
     while(true)
     {
@@ -31,11 +32,17 @@ void autonomous()
         break;
         case COLLECTI:
         // Drive forward and collect the first cube
+          while(!Hardware::drive_system.drive_forward(12, 0.75)){
+            //TODO: linear slide
 
+          }
+          Hardware::vert_intake.takeIn();
+          pros::delay(500);
+          Hardware::vert_intake.stop();
         break;
         case TURN1:
         // Turn torwards the second cube
-
+          Hardware::drive_system.turn_degrees(90, 0.5);
         break;
         case DRIVE1:
         // Drive towards the second cube
@@ -62,7 +69,7 @@ void autonomous()
 
         break;
         case TURN4:
-        // Turn toward the wall 
+        // Turn toward the wall
 
         break;
         case DRIVE3:
