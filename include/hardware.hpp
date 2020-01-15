@@ -4,6 +4,7 @@
 #include "okapi/impl/device/motor/motorGroup.hpp"
 #include "subsystems/rd4Bar.hpp"
 #include "subsystems/vertical_intake.hpp"
+#include "subsystems/horiz_intake.hpp"
 #include "okapi/impl/device/rotarysensor/adiGyro.hpp"
 #include "subsystems/tank_drive.hpp"
 #include "config.hpp"
@@ -31,13 +32,14 @@ namespace Hardware
 
     //Both parts of the intake
     extern okapi::MotorGroup linear_slide;  //Horizontal: 2 motors
-    extern okapi::MotorGroup intake_rollers;  //Vertical: 2 motors
+    extern okapi::MotorGroup slide_rollers;  //Vertical: 2 motors
+    extern okapi::MotorGroup compliant_wheels;
 
     extern pros::Motor spool;
 
     extern VerticalIntake vert_intake;
 
-
+    extern HorizIntake horiz_intake;
 
     extern Motor magazine;
 }

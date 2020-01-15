@@ -1,7 +1,13 @@
+/**
+* Purpose: Run the linear slide and rollers that are
+*   responsible for taking cubes in to a position
+*   that the vertical intake can utilize
+* Usage: 
+*/
 #ifndef _HORIZ_INTAKE_
 #define _HORIZ_INTAKE_
 
-#include "pros/motors.hpp"
+#include "okapi/impl/device/motor/motorGroup.hpp"
 
 using namespace pros;
 
@@ -9,25 +15,39 @@ class HorizIntake
 {
 private:
 
-  Motor left, right;
-
-  int motor_speed = 1;
+  okapi::MotorGroup linear_slide;
+  okapi::MotorGroup slide_rollers;
 
 public:
 
-  void run_intake(bool in_button, bool out_button)
-  {
-    int direction = (in_button == true) ? 1 : (out_button == true) ? -1 : 0;
+  HorizIntake(okapi::MotorGroup linear_slide, okapi::MotorGroup slide_rollers):
+  linear_slide(linear_slide), slide_rollers(slide_rollers)
+  {}
 
-    left.move_voltage(12000 * direction * motor_speed);
-    right.move_voltage(12000 * direction * motor_speed);
-
+  //SLIDE FUNCTIONALITY
+  void slide_out(){
+    linear_slide.moveVoltage(6000);
   }
 
-  HorizIntake(Motor left_motor, Motor right_motor):
-  left(left_motor), right(right_motor)
-  {
+  void slide_in(){
+    linear_slide.moveVoltage(-6000);
+  }
 
+  void stop_slide(){
+    linear_slide.moveVoltage(0);
+  }
+
+  //ROLLER FUNCTIONALITY
+  void takeIn(){
+    slide_rollers.moveVoltage(6000);
+  }
+
+  void release(){
+    slide_rollers.moveVoltage(-6000);
+  }
+
+  void stop_roller(){
+    slide_rollers.moveVoltage(0);
   }
 
 };

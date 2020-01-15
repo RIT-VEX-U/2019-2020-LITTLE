@@ -13,16 +13,17 @@ Motor Hardware::right_rear(15);
 
 TankDrive Hardware::drive_system(left_front, right_front, left_rear, right_rear, E_MOTOR_GEARSET_18, &gyro, &config::drive_config, &config::drive_pid, &config::turn_pid);
 
-okapi::MotorGroup Hardware::lift_motors = {5, -6, 7, -8};
+okapi::MotorGroup Hardware::lift_motors = {5, -6, -7, 8};
 
 rd4Bar Hardware::lift(Hardware::lift_motors, 20);
 
 //!!! TEMP VALS !!!
-okapi::MotorGroup Hardware::linear_slide = {1, 2};
-okapi::MotorGroup Hardware::intake_rollers = {3, 4};
+okapi::MotorGroup Hardware::linear_slide = {-1, 11};
+okapi::MotorGroup Hardware::slide_rollers = {12, -3};
+okapi::MotorGroup Hardware::compliant_wheels = {17, 18};
 
-Motor Hardware::spool(10);
+Motor Hardware::spool(16);
 
-VerticalIntake Hardware::vert_intake(intake_rollers, spool);
+VerticalIntake Hardware::vert_intake(compliant_wheels, spool);
 
-Motor Hardware::magazine(11);
+HorizIntake Hardware::horiz_intake(linear_slide, slide_rollers);

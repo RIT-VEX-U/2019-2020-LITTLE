@@ -43,7 +43,41 @@ void opcontrol() {
 
 	while (true)
   {
+    //Runs tank drive
     drive_system.drive(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_Y));
+
+    //Lift
+    if(Hardware::master.get_digital(DIGITAL_R2)){
+      Hardware::lift.raise(12000);
+    }
+    else if(Hardware::master.get_digital(DIGITAL_R1)){
+      Hardware::lift.lower(12000);
+    }
+    else{
+      Hardware::lift.stop();
+    }
+
+    //Rollers for horizontal intake
+    if(Hardware::master.get_digital(DIGITAL_X)){
+      Hardware::horiz_intake.takeIn();
+    }
+    else if(Hardware::master.get_digital(DIGITAL_Y)){
+      Hardware::horiz_intake.release();
+    }
+    else{
+      Hardware::horiz_intake.stop_roller();
+    }
+
+    //Linear side for horizontal intake
+    if(Hardware::master.get_digital(DIGITAL_A)){
+      Hardware::horiz_intake.slide_out();
+    }
+    else if(Hardware::master.get_digital(DIGITAL_B)){
+      Hardware::horiz_intake.slide_in();
+    }
+    else{
+      Hardware::horiz_intake.stop_slide();
+    }
 
 
 

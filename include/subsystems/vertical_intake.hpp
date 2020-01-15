@@ -1,4 +1,4 @@
-#include "hardware.hpp"
+#include "okapi/impl/device/motor/motorGroup.hpp"
 
 class VerticalIntake{
 private:
