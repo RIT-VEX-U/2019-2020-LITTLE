@@ -42,7 +42,7 @@ private:
 
   int gearset;
 
-  okapi::ADIGyro *gyro;  
+  okapi::ADIGyro *gyro;
 
 
   // common variables
@@ -100,6 +100,9 @@ public:
     right_front.set_encoder_units(pros::E_MOTOR_ENCODER_ROTATIONS);
     left_rear.set_encoder_units(pros::E_MOTOR_ENCODER_ROTATIONS);
     right_rear.set_encoder_units(pros::E_MOTOR_ENCODER_ROTATIONS);
+
+    right_front.set_reversed(true);
+    right_rear.set_reversed(true);
   }
 
 };

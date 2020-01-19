@@ -3,6 +3,7 @@
 TankDrive::config_t config::drive_config = {};
 PID::config_t config::drive_pid = {};
 PID::config_t config::turn_pid = {};
+PID::config_t config::lift_pid_config = {};
 
 void config::initialize()
 {
@@ -24,4 +25,8 @@ void config::initialize()
     turn_pid.deadband = 0;
     turn_pid.on_target_time = 0;
 
+    lift_pid_config.feedforward = 2000;
+    lift_pid_config.p = 30000;
+    lift_pid_config.deadband = 0.02;
+    lift_pid_config.on_target_time = 0.3;
 }

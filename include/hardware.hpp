@@ -16,10 +16,11 @@ namespace Hardware
 
     extern Controller master;
 
-    extern pros::Motor left_front;
-    extern pros::Motor right_front;
-    extern pros::Motor left_rear;
-    extern pros::Motor right_rear;
+    //DRIVE MOTORS
+    extern Motor left_front;
+    extern Motor right_front;
+    extern Motor left_rear;
+    extern Motor right_rear;
 
     extern TankDrive drive_system;
 
@@ -30,12 +31,13 @@ namespace Hardware
     extern okapi::MotorGroup lift_motors;
     extern rd4Bar lift;
 
-    //Both parts of the intake
-    extern okapi::MotorGroup linear_slide;  //Horizontal: 2 motors
-    extern okapi::MotorGroup slide_rollers;  //Vertical: 2 motors
-    extern okapi::MotorGroup compliant_wheels;
+    //Horizontal intake components
+    extern okapi::MotorGroup linear_slide;
+    extern okapi::MotorGroup slide_rollers;
 
-    extern pros::Motor spool;
+    //Vertical intake components
+    extern okapi::MotorGroup compliant_wheels;
+    extern Motor spool;
 
     extern VerticalIntake vert_intake;
 
