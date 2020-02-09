@@ -24,9 +24,4 @@ void config::initialize()
     turn_pid.feedforward = 0;
     turn_pid.deadband = 0;
     turn_pid.on_target_time = 0;
-
-    lift_pid_config.feedforward = 2000;
-    lift_pid_config.p = 30000;
-    lift_pid_config.deadband = 0.02;
-    lift_pid_config.on_target_time = 0.3;
 }

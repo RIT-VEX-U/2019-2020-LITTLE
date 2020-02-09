@@ -25,18 +25,19 @@ void PID::update(double sensorVal)
     double time_delta = (pros::c::millis() / 1000.0) - last_time;
 
     accum_error += time_delta * get_error();
-    
+
 
     out = (config->feedforward)
         + (config->p * get_error())
         + (config->i * accum_error)
         + (config->d * (get_error() - last_error) / time_delta);
-    
+
     last_time = pros::c::millis() / 1000.0;
     last_error = get_error();
 
-    out = (out < lower_limit) ? lower_limit : (out > upper_limit) ? upper_limit : out;
-    
+    if(lower_limit != 0 || upper_limit != 0)
+        out = (out < lower_limit) ? lower_limit : (out > upper_limit) ? upper_limit : out;
+
 }
 
 /**
@@ -64,7 +65,7 @@ void PID::set_target(double target)
 }
 
 /**
- * Set the limits on the PID out. The PID out will "clip" itself to be 
+ * Set the limits on the PID out. The PID out will "clip" itself to be
  * between the limits.
  */
 void PID::set_limits(double lower, double upper)
@@ -85,7 +86,7 @@ bool PID::is_on_target()
         {
             return true;
         }
-        
+
     }else
     {
         is_checking_on_target = false;
