@@ -7,20 +7,18 @@
 
 
 namespace Hardware{
-  //extern okapi::MotorGroup drive_train;
-
+  // drive train motors
   extern pros::Motor right_front;
   extern pros::Motor right_back;
   extern pros::Motor left_front;
   extern pros::Motor left_back;
 
+  // drive system
   extern TankDrive drive_system;
-
+  
   extern okapi::ADIGyro gyro;
 
   extern okapi::MotorGroup tilt_drive;
-
-  extern okapi::MotorGroup lift_motors;
 
   extern okapi::MotorGroup intake_motors;
 

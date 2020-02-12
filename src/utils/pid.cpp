@@ -1,5 +1,6 @@
 #include "utils/pid.hpp"
 #include "api.h"
+#include "hardware.hpp"
 
 /**
  * Reset the PID loop by resetting time since 0 and accumulated error.
@@ -13,6 +14,9 @@ void PID::reset()
     is_checking_on_target = false;
     on_target_last_time = 0;
 }
+
+char const *debug_format = "error: %f";
+char debug[100];
 
 /**
  * Update the PID loop by taking the time difference from last update,
@@ -31,6 +35,9 @@ void PID::update(double sensorVal)
         + (config->p * get_error())
         + (config->i * accum_error)
         + (config->d * (get_error() - last_error) / time_delta);
+
+    sprintf(debug, debug_format, get_error());
+    Hardware::master.print(2, 1, debug);
 
     last_time = pros::c::millis() / 1000.0;
     last_error = get_error();

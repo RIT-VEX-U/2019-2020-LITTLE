@@ -67,7 +67,24 @@ bin/utils/pid.cpp.o: src/utils/pid.cpp include/utils/pid.hpp \
  include/pros/imu.hpp include/pros/imu.h include/pros/llemu.hpp \
  include/pros/llemu.h include/pros/misc.hpp include/pros/misc.h \
  include/pros/motors.hpp include/pros/motors.h include/pros/rtos.hpp \
- include/pros/vision.hpp include/pros/vision.h
+ include/pros/vision.hpp include/pros/vision.h include/hardware.hpp \
+ include/subsystems/tank_drive.hpp \
+ include/okapi/impl/device/motor/motorGroup.hpp \
+ include/okapi/api/device/motor/abstractMotor.hpp \
+ include/okapi/api/control/controllerOutput.hpp \
+ include/okapi/api/device/rotarysensor/continuousRotarySensor.hpp \
+ include/okapi/api/device/rotarysensor/rotarySensor.hpp \
+ include/okapi/api/control/controllerInput.hpp \
+ include/okapi/api/coreProsAPI.hpp include/pros/apix.h \
+ include/pros/serial.h include/pros/serial.hpp \
+ include/okapi/api/util/logging.hpp \
+ include/okapi/api/util/abstractTimer.hpp \
+ include/okapi/api/units/QFrequency.hpp \
+ include/okapi/api/units/RQuantity.hpp include/okapi/api/units/QTime.hpp \
+ include/okapi/api/util/mathUtil.hpp include/okapi/impl/util/timer.hpp \
+ include/okapi/impl/device/motor/motor.hpp \
+ include/okapi/impl/device/rotarysensor/adiGyro.hpp include/logging.hpp \
+ include/main.h include/api.h include/config.hpp include/utils/pid.hpp
 
 include/utils/pid.hpp:
 
@@ -326,3 +343,55 @@ include/pros/rtos.hpp:
 include/pros/vision.hpp:
 
 include/pros/vision.h:
+
+include/hardware.hpp:
+
+include/subsystems/tank_drive.hpp:
+
+include/okapi/impl/device/motor/motorGroup.hpp:
+
+include/okapi/api/device/motor/abstractMotor.hpp:
+
+include/okapi/api/control/controllerOutput.hpp:
+
+include/okapi/api/device/rotarysensor/continuousRotarySensor.hpp:
+
+include/okapi/api/device/rotarysensor/rotarySensor.hpp:
+
+include/okapi/api/control/controllerInput.hpp:
+
+include/okapi/api/coreProsAPI.hpp:
+
+include/pros/apix.h:
+
+include/pros/serial.h:
+
+include/pros/serial.hpp:
+
+include/okapi/api/util/logging.hpp:
+
+include/okapi/api/util/abstractTimer.hpp:
+
+include/okapi/api/units/QFrequency.hpp:
+
+include/okapi/api/units/RQuantity.hpp:
+
+include/okapi/api/units/QTime.hpp:
+
+include/okapi/api/util/mathUtil.hpp:
+
+include/okapi/impl/util/timer.hpp:
+
+include/okapi/impl/device/motor/motor.hpp:
+
+include/okapi/impl/device/rotarysensor/adiGyro.hpp:
+
+include/logging.hpp:
+
+include/main.h:
+
+include/api.h:
+
+include/config.hpp:
+
+include/utils/pid.hpp:
