@@ -13,16 +13,34 @@
  * from where it left off.
  */
 
+//Using objects and functions declared in the Hardware class (hardware.hpp)
 using namespace Hardware;
 
-// Timer object used to "time out" functions
-okapi::Timer timer;
-
+//current color acts as a multiplier for turns, determines right or left
 enum COLOR {BLUE = 1, RED = -1};
-
 COLOR curr_color = BLUE;
 
-//Aim: one cube in center tower closest to starting squares
+void collect_cube_dist(double inches){
+  while(!drive_system.drive_forward(inches, 0.75)){
+    intake_chain.moveVoltage(12000);
+  }
+  intake_chain.moveVoltage(0);
+}
+
+//Aim: Two cube stack in scoring zone
 void autonomous(){
-  
+  unfold();
+  //while(!drive_system.drive_forward(7, 0.5)){}
+  //while(!drive_system.drive_forward(-7, 0.5)){}
+
+
+  //collect_cube_dist(12);
+  //while(!drive_system.drive_forward(5, 0.75)){}
+  /*while(!drive_system.turn_degrees(curr_color * 90, 0.5)){}
+  collect_cube_dist(24);
+  while(!drive_system.turn_degrees(curr_color * 90, 0.5)){}
+  while(!drive_system.drive_forward(12, 0.75)){}
+  while(!drive_system.turn_degrees(curr_color * -90, 0.5)){}
+  while(!drive_system.drive_forward(2, 0.5)){}
+  drop_off();*/
 }

@@ -21,40 +21,75 @@ using namespace Hardware;
 * CONTROL LAYOUT:
 *
 */
-void opcontrol() {
-	char const *debug_format = "encoder: %f";
-	char debug[100];
 
-	while(!drive_system.drive_forward(5, 0.75)){
-		pros::delay(50);
-	}
+void opcontrol() {
+	char const *debug_format = "%s mode";
+	char debug[100];
+	intake_arms.setEncoderUnits(okapi::MotorGroup::encoderUnits::rotations);
+	ramp.setEncoderUnits(okapi::MotorGroup::encoderUnits::rotations);
+
+	float intake_pos = 0.0;
+	float drive_mult = 0.005;
 
 	while (true) {
 		//tank drive controls
-    drive_system.drive(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_Y));
+    drive_system.drive(master.get_analog(ANALOG_LEFT_Y) * drive_mult, master.get_analog(ANALOG_RIGHT_Y) * drive_mult);
 
+		if(drive_mult == 1.0){
+			sprintf(debug, debug_format, "SPEED RACER");
+		}
+		else{
+			sprintf(debug, debug_format, "scoring");
+		}
+		master.print(2, 1, debug);
+
+		if(master.get_digital(DIGITAL_RIGHT)){
+			drive_mult = 1.0;
+		}
+		else if(master.get_digital(DIGITAL_LEFT)){
+			drive_mult = 0.005;
+		}
 
     //
 		if(master.get_digital(DIGITAL_L1)){
-      tilt_drive.moveVoltage(6000);
+      ramp.moveVoltage(6000);
 		}
 		else if(master.get_digital(DIGITAL_L2)){
-			tilt_drive.moveVoltage(-6000);
+			ramp.moveVoltage(-6000);
 		}
     else{
-      tilt_drive.moveVoltage(0);
+      ramp.moveVoltage(0);
     }
 
-
-		if(master.get_digital(DIGITAL_A)){
-			intake_motors.moveVoltage(12000);
+		if(master.get_digital(DIGITAL_X)){
+			intake_pos = -5.9;
 		}
-		else if(master.get_digital(DIGITAL_B)){
-			intake_motors.moveVoltage(-12000);
+		else if(master.get_digital(DIGITAL_R1)){
+			intake_arms.moveVoltage(12000);
+			intake_pos = intake_arms.getPosition();
+		}
+		else if(master.get_digital(DIGITAL_R2)){
+			intake_arms.moveVoltage(-12000);
+			intake_pos = intake_arms.getPosition();
 		}
 		else{
-			intake_motors.moveVoltage(0);
+			intake_arms.moveAbsolute(intake_pos, 200);
 		}
+
+		if(master.get_digital(DIGITAL_A) ){
+			intake_chain.moveVoltage(12000);
+		}
+		else if(master.get_digital(DIGITAL_Y)){
+			intake_chain.moveVoltage(-12000);
+		}
+		else if(master.get_digital(DIGITAL_B)){
+			intake_chain.moveVoltage(0);
+		}
+
+		if(master.get_digital(DIGITAL_UP)){
+			drop_off();
+		}
+
 		pros::delay(50);
 	}
 }

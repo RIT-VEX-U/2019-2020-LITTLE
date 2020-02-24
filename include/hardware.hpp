@@ -7,6 +7,7 @@
 
 
 namespace Hardware{
+
   // drive train motors
   extern pros::Motor right_front;
   extern pros::Motor right_back;
@@ -15,15 +16,24 @@ namespace Hardware{
 
   // drive system
   extern TankDrive drive_system;
-  
+
   extern okapi::ADIGyro gyro;
 
-  extern okapi::MotorGroup tilt_drive;
+  extern okapi::MotorGroup ramp;
 
-  extern okapi::MotorGroup intake_motors;
+  //The motors driving the intake "arms"
+  extern okapi::MotorGroup intake_arms;
+
+  //The motors driving the flaps/chain around the intake
+  extern okapi::MotorGroup intake_chain;
 
   extern pros::Controller master;
 
+  //auto stack placing function
+  void drop_off();
+
+  //auto unfolding function
+  void unfold();
 
 }
 

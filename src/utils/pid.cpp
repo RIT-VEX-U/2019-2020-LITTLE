@@ -1,6 +1,13 @@
 #include "utils/pid.hpp"
 #include "api.h"
+#include "okapi/impl/util/timer.hpp"
 #include "hardware.hpp"
+
+//Whether or not the pid has already been called once
+bool initialized = false;
+
+//Timer for finding the time passed since the pid was originally called
+okapi::Timer timer2 = okapi::Timer();
 
 /**
  * Reset the PID loop by resetting time since 0 and accumulated error.
@@ -12,6 +19,7 @@ void PID::reset()
     accum_error = 0;
 
     is_checking_on_target = false;
+    initialized = false;
     on_target_last_time = 0;
 }
 
@@ -24,9 +32,17 @@ char debug[100];
  */
 void PID::update(double sensorVal)
 {
+    //Place a timer "mark" to compare current time to
+    //if this is the first call to update
+    if (!initialized){
+      timer2.placeMark();
+      initialized = true;
+    }
+
     this->sensorVal = sensorVal;
 
-    double time_delta = (pros::c::millis() / 1000.0) - last_time;
+    //getting the time difference from the first call to update
+    double time_delta = timer2.getDtFromMark().getValue();
 
     accum_error += time_delta * get_error();
 
@@ -35,9 +51,6 @@ void PID::update(double sensorVal)
         + (config->p * get_error())
         + (config->i * accum_error)
         + (config->d * (get_error() - last_error) / time_delta);
-
-    sprintf(debug, debug_format, get_error());
-    Hardware::master.print(2, 1, debug);
 
     last_time = pros::c::millis() / 1000.0;
     last_error = get_error();
